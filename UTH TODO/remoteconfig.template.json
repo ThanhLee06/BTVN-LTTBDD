@@ -1,0 +1,16 @@
+{
+  "conditions": [],
+  "parameters": {
+    "banner_message": {
+      "defaultValue": { "value": "UTH Todo đã đồng bộ Firebase — cùng hoàn thành mục tiêu hôm nay!" },
+      "description": "Thông điệp động hiển thị trên Home",
+      "valueType": "STRING"
+    },
+    "show_test_ads": {
+      "defaultValue": { "value": "true" },
+      "description": "Bật banner quảng cáo test trong bản bài tập",
+      "valueType": "BOOLEAN"
+    }
+  },
+  "parameterGroups": {}
+}
