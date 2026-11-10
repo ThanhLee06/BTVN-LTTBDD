@@ -3,6 +3,13 @@ package com.example.uthtodo.components
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.platform.LocalContext
+import android.content.Context
+import android.os.Handler
+import android.os.Looper
+import com.google.android.gms.ads.MobileAds
+import kotlinx.coroutines.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.viewinterop.AndroidView
 import com.google.android.gms.ads.AdRequest
@@ -11,6 +18,15 @@ import com.google.android.gms.ads.AdView
 
 object AdService {
     val ready = mutableStateOf(false)
+    private var initializing = false
+    @Synchronized fun initialize(context: Context) {
+        if (initializing) return
+        initializing = true
+        val app = context.applicationContext
+        CoroutineScope(SupervisorJob() + Dispatchers.IO).launch {
+            MobileAds.initialize(app) { Handler(Looper.getMainLooper()).post { ready.value = true } }
+        }
+    }
 }
 
 /**
@@ -20,6 +36,9 @@ object AdService {
 fun AdMobBanner(
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
+    LaunchedEffect(context) { AdService.initialize(context) }
+    if (!AdService.ready.value) return
     AndroidView(
         modifier = modifier.fillMaxWidth(),
         factory = { context ->

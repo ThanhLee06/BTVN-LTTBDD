@@ -16,6 +16,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         NotificationService.handleIntent(intent)
+        com.example.uthtodo.features.FeatureGraph.handleIntent(intent)
         setContent {
             EX1_W4Theme {
                 AppNavigation(modifier = Modifier.fillMaxSize())
@@ -27,5 +28,6 @@ class MainActivity : ComponentActivity() {
         super.onNewIntent(intent)
         setIntent(intent)
         NotificationService.handleIntent(intent)
+        com.example.uthtodo.features.FeatureGraph.handleIntent(intent)
     }
 }

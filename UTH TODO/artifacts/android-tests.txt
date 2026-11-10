@@ -1,0 +1,9 @@
+
+com.example.uthtodo.TaskScreensTest:......
+com.example.uthtodo.TaskApiReadTest:.
+
+Time: 18.767
+
+OK (7 tests)
+
+

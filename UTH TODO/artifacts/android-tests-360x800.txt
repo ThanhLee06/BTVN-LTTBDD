@@ -1,0 +1,8 @@
+
+com.example.uthtodo.TaskScreensTest:......
+
+Time: 15.37
+
+OK (6 tests)
+
+

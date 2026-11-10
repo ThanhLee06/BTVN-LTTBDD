@@ -1,0 +1,22 @@
+
+com.example.uthtodo.PermissionFeaturesTest:....
+Error in e_alarmPostsAndOpensCorrectLocalTask(com.example.uthtodo.PermissionFeaturesTest):
+java.lang.AssertionError: Notification must open task detail
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.example.uthtodo.PermissionFeaturesTest.e_alarmPostsAndOpensCorrectLocalTask(PermissionFeaturesTest.kt:121)
+
+com.example.uthtodo.FullFeatureFlowTest:.
+
+Time: 40.727
+There was 1 failure:
+1) e_alarmPostsAndOpensCorrectLocalTask(com.example.uthtodo.PermissionFeaturesTest)
+java.lang.AssertionError: Notification must open task detail
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.example.uthtodo.PermissionFeaturesTest.e_alarmPostsAndOpensCorrectLocalTask(PermissionFeaturesTest.kt:121)
+
+FAILURES!!!
+Tests run: 6,  Failures: 1
+
+

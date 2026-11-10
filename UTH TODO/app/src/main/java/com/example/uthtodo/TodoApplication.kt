@@ -19,12 +19,8 @@ class TodoApplication : Application() {
         super.onCreate()
         AppCheckSetup.install()
         NotificationService.initialize(this)
+        com.example.uthtodo.features.FeatureGraph.initialize(this)
         RemoteConfigService.initialize()
-        CoroutineScope(Dispatchers.IO).launch {
-            MobileAds.initialize(this@TodoApplication) {
-                Handler(Looper.getMainLooper()).post { AdService.ready.value = true }
-            }
-        }
         FirebaseAuth.getInstance().addAuthStateListener {
             TodoRepository.updateWithFirebaseUser(it.currentUser)
         }

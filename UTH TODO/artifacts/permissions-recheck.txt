@@ -1,0 +1,60 @@
+
+com.example.uthtodo.PermissionFeaturesTest:
+Error in e_alarmPostsAndOpensCorrectLocalTask(com.example.uthtodo.PermissionFeaturesTest):
+java.lang.IllegalStateException: Method setCurrentState must be called on the main thread
+	at androidx.lifecycle.LifecycleRegistry.enforceMainThreadIfNeeded(LifecycleRegistry.kt:382)
+	at androidx.lifecycle.LifecycleRegistry.setCurrentState(LifecycleRegistry.kt:139)
+	at androidx.navigation.NavBackStackEntry.updateState(NavBackStackEntry.kt:197)
+	at androidx.navigation.NavBackStackEntry.setMaxLifecycle(NavBackStackEntry.kt:172)
+	at androidx.navigation.NavController.updateBackStackLifecycle$navigation_runtime_release(NavController.kt:1177)
+	at androidx.navigation.NavController.dispatchOnDestinationChanged(NavController.kt:1079)
+	at androidx.navigation.NavController.navigate(NavController.kt:2056)
+	at androidx.navigation.NavController.navigate(NavController.kt:2445)
+	at androidx.navigation.NavController.navigate$default(NavController.kt:2418)
+	at androidx.navigation.NavController.navigate(NavController.kt:2401)
+	at com.example.uthtodo.navigation.AppNavigationKt$AppNavigation$3$1.invokeSuspend(AppNavigation.kt:142)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+	at androidx.compose.ui.test.ApplyingContinuationInterceptor$SendApplyContinuation.resumeWith(ApplyingContinuationInterceptor.kt:52)
+	at androidx.compose.ui.test.FrameDeferringContinuationInterceptor$FrameDeferredContinuation.resumeWith(FrameDeferringContinuationInterceptor.jvmAndAndroid.kt:187)
+	at kotlinx.coroutines.internal.DispatchedContinuationKt.resumeCancellableWith(DispatchedContinuation.kt:279)
+	at kotlinx.coroutines.DispatchedCoroutine.afterResume(Builders.common.kt:256)
+	at kotlinx.coroutines.AbstractCoroutine.resumeWith(AbstractCoroutine.kt:101)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:46)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1100)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:1571)
+
+com.example.uthtodo.FeatureStoreTest:....
+
+Time: 31.73
+There was 1 failure:
+1) e_alarmPostsAndOpensCorrectLocalTask(com.example.uthtodo.PermissionFeaturesTest)
+java.lang.IllegalStateException: Method setCurrentState must be called on the main thread
+	at androidx.lifecycle.LifecycleRegistry.enforceMainThreadIfNeeded(LifecycleRegistry.kt:382)
+	at androidx.lifecycle.LifecycleRegistry.setCurrentState(LifecycleRegistry.kt:139)
+	at androidx.navigation.NavBackStackEntry.updateState(NavBackStackEntry.kt:197)
+	at androidx.navigation.NavBackStackEntry.setMaxLifecycle(NavBackStackEntry.kt:172)
+	at androidx.navigation.NavController.updateBackStackLifecycle$navigation_runtime_release(NavController.kt:1177)
+	at androidx.navigation.NavController.dispatchOnDestinationChanged(NavController.kt:1079)
+	at androidx.navigation.NavController.navigate(NavController.kt:2056)
+	at androidx.navigation.NavController.navigate(NavController.kt:2445)
+	at androidx.navigation.NavController.navigate$default(NavController.kt:2418)
+	at androidx.navigation.NavController.navigate(NavController.kt:2401)
+	at com.example.uthtodo.navigation.AppNavigationKt$AppNavigation$3$1.invokeSuspend(AppNavigation.kt:142)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+	at androidx.compose.ui.test.ApplyingContinuationInterceptor$SendApplyContinuation.resumeWith(ApplyingContinuationInterceptor.kt:52)
+	at androidx.compose.ui.test.FrameDeferringContinuationInterceptor$FrameDeferredContinuation.resumeWith(FrameDeferringContinuationInterceptor.jvmAndAndroid.kt:187)
+	at kotlinx.coroutines.internal.DispatchedContinuationKt.resumeCancellableWith(DispatchedContinuation.kt:279)
+	at kotlinx.coroutines.DispatchedCoroutine.afterResume(Builders.common.kt:256)
+	at kotlinx.coroutines.AbstractCoroutine.resumeWith(AbstractCoroutine.kt:101)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:46)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1100)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:1571)
+
+FAILURES!!!
+Tests run: 4,  Failures: 1
+
+

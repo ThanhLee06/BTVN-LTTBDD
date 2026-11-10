@@ -29,6 +29,9 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import com.example.uthtodo.data.TaskGraph
+import com.example.uthtodo.data.TaskRules
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -66,12 +69,13 @@ fun ProfileScreen(
     val scope = rememberCoroutineScope()
     var isLoading by remember { mutableStateOf(false) }
     val user = TodoRepository.currentUser.value
-    val weeklyStats = TodoRepository.weeklyStats
+    val taskState by TaskGraph.repository.state.collectAsState()
+    val weeklyStats = TaskRules.weeklyStats(taskState.tasks, TaskGraph.clock.today())
 
-    val completedCount = TodoRepository.getCompletedCount()
-    val totalCount = TodoRepository.getTotalCount()
+    val completedCount = taskState.tasks.count { it.isCompleted }
+    val totalCount = taskState.tasks.size
     val pendingCount = totalCount - completedCount
-    val rate = TodoRepository.getProgressPercent()
+    val rate = TaskRules.percent(taskState.tasks)
 
     Box(
         modifier = modifier

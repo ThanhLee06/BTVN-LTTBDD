@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import com.example.uthtodo.BuildConfig
 import com.example.uthtodo.model.TodoRepository
+import com.example.uthtodo.data.TaskGraph
 import com.example.uthtodo.services.*
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -45,35 +46,23 @@ fun NotificationsScreen(onBack: () -> Unit) {
 }
 
 @Composable
-fun SettingsScreen(onBack: () -> Unit, onProfile: () -> Unit) {
+fun SettingsScreen(onBack: () -> Unit, onProfile: () -> Unit, onTaskRefresh: () -> Unit, onPermissions: () -> Unit = {}) {
     val context = LocalContext.current
+    val tasksState by TaskGraph.repository.state.collectAsState()
     var appCheckStatus by remember { mutableStateOf("") }
-    var notificationsAllowed by remember {
-        mutableStateOf(Build.VERSION.SDK_INT < 33 || ContextCompat.checkSelfPermission(context,
-            Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED)
-    }
-    val permission = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) {
-        notificationsAllowed = it
-    }
     Column(Modifier.fillMaxSize().statusBarsPadding().navigationBarsPadding().padding(20.dp)
         .verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(14.dp)) {
         TextButton(onClick = onBack) { Text("‹ Quay lại") }
         Text("Cài đặt", style = MaterialTheme.typography.headlineMedium)
         OutlinedButton(onClick = onProfile) { Text("Thông tin cá nhân") }
+        OutlinedButton(onClick = onPermissions) { Text("Quyền ứng dụng") }
         Text("Đồng bộ công việc", style = MaterialTheme.typography.titleMedium)
         Text(PresenceService.status.value)
-        Text(TodoRepository.syncError.value ?: when {
-            TodoRepository.hasPendingWrites.value -> "Có thay đổi đang chờ đồng bộ"
-            TodoRepository.isFromCache.value -> "Đang dùng dữ liệu đã lưu trên thiết bị"
-            else -> "Công việc được đồng bộ theo tài khoản"
-        })
-        OutlinedButton(onClick = TodoRepository::retrySync) { Text("Đồng bộ lại") }
+        Text(tasksState.error ?: if (tasksState.loading) "Đang tải công việc…" else "Công việc từ API bài tập. Bản đã chỉnh và dữ liệu đính kèm được giữ trên thiết bị theo tài khoản.")
+        OutlinedButton(onClick = onTaskRefresh, enabled = !tasksState.loading) { Text("Đồng bộ lại") }
         HorizontalDivider()
         Text("Thông báo", style = MaterialTheme.typography.titleMedium)
-        Text(if (notificationsAllowed) "Đã cho phép thông báo" else "Chưa cho phép thông báo")
-        if (!notificationsAllowed && Build.VERSION.SDK_INT >= 33) {
-            OutlinedButton(onClick = { permission.launch(Manifest.permission.POST_NOTIFICATIONS) }) { Text("Cho phép thông báo") }
-        }
+        OutlinedButton(onClick = onPermissions) { Text("Quản lý quyền và thử nhắc việc") }
         Text(NotificationService.tokenStatus.value, style = MaterialTheme.typography.bodySmall)
         HorizontalDivider()
         Text(RemoteConfigService.status.value)

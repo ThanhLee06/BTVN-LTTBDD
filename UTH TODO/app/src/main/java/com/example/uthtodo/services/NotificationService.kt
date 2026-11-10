@@ -92,6 +92,7 @@ object NotificationService {
         if (FirebaseAuth.getInstance().currentUser == null) return
         rememberNotice(title, body)
         if (Build.VERSION.SDK_INT >= 33 && ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) return
+        if (!androidx.core.app.NotificationManagerCompat.from(context).areNotificationsEnabled()) return
         val intent = Intent(context, MainActivity::class.java).putExtra("open_notifications", true)
             .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pending = PendingIntent.getActivity(context, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
